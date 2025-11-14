@@ -74,7 +74,7 @@ export default function Hero() {
                 clipRule="evenodd"
               />
             </svg>
-            Selise Bhutan
+            Jaggle.AI
           </span>
         </div>
       </motion.div>
