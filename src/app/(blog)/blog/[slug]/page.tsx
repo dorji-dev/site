@@ -111,7 +111,7 @@ const components = {
   ),
 };
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
+const BlogPostPage = async ({ params }: BlogPostPageProps) => {
   const { slug } = await params;
   const post = getBlogPost(slug);
 
@@ -121,7 +121,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="space-y-16">
-      {/* Article header */}
       <header className="mb-8">
         <div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
@@ -176,7 +175,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </header>
 
-      {/* Article content */}
       <article className="space-y-8">
         <div className="  mx-auto">
           <div className="border-y border-border py-4">
@@ -197,4 +195,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <BlogComments />
     </div>
   );
-}
+};
+
+export default BlogPostPage;

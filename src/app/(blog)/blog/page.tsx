@@ -14,12 +14,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+const BlogPage = () => {
   const posts = getAllBlogPosts();
 
   return (
     <>
-      {/* Hero section */}
       <div className="mb-8">
         <div className="space-y-4">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -54,7 +53,6 @@ export default function BlogPage() {
         </div>
       </div>
 
-      {/* Content section */}
       {posts.length === 0 ? (
         <div className="text-center py-12">
           <div className="space-y-4 text-muted-foreground">
@@ -105,4 +103,6 @@ export default function BlogPage() {
       )}
     </>
   );
-}
+};
+
+export default BlogPage;

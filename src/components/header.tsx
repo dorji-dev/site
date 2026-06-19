@@ -10,7 +10,7 @@ export default function Header() {
           href="/"
           className="text-xs font-bold text-muted-foreground hover:text-primary hover-translate transition-all duration-200"
         >
-          HOME
+          JOURNEY
         </Link>
         <Link
           href="/blog"
