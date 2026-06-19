@@ -25,6 +25,11 @@ This document defines how a visitor experiences the portfolio — not as a resum
 | Opening tone | **Cinematic and quiet** — stars, slow reveal, no immediate UI chrome |
 | Blog | **Both** — teaser/archive in-world; full posts at `/blog` |
 | Tagline | Anyone can learn anything — I learned between wild animals and slow Wi‑Fi. |
+| Locomotion | **Vehicle + dismount** — low-poly mountain jeep on path; auto-dismount in interior acts |
+| Sound | **Ambient bed + act accents** — mute toggle; auto-mute with `prefers-reduced-motion` |
+| Say hi | **Postcard rack** on final overlook — X (primary), GitHub, Facebook |
+| Lite fallback | **Prompt on struggle; auto only if WebGL fails** — see thresholds below |
+| Blog teasers | **Latest 3 posts** in Act VI terminal + always "View all → `/blog`" |
 
 ---
 
@@ -51,7 +56,7 @@ flowchart LR
     E --> F[City — Selise → Jaggle → present]
 ```
 
-The visitor walks (or drives) forward along the path. Each zone is an **act** tied to a life chapter. The environment morphs; the path does not fork permanently.
+The visitor drives a low-poly **mountain jeep** along the path and **dismounts** in tight interior zones. Each zone is an **act** tied to a life chapter. The environment morphs; the path does not fork permanently.
 
 ---
 
@@ -230,9 +235,20 @@ After Act VI, the path opens to a quiet overlook (mountains or city lights).
 
 **Soft CTAs (no recruitment):**
 - Blog archive (in-world terminal → `/blog`)
-- GitHub
-- split.dorji.dev
-- Say hi (email / social — TBD)
+- split.dorji.dev (receipt object in Act VI)
+- **Postcard rack** — say hi without a recruiter funnel (see below)
+
+**Postcard rack (say hi):**
+
+A mailbox or postcard stand on the final overlook holds three stamped cards:
+
+| Card | Link | Role |
+|------|------|------|
+| **X** | [x.com/DorjiBolt](https://x.com/DorjiBolt) | Primary — casual hello |
+| **GitHub** | [github.com/dorji-dev](https://github.com/dorji-dev) | For devs who want code |
+| **Facebook** | [facebook.com/share/1CmMsS1W82](https://www.facebook.com/share/1CmMsS1W82/) | Secondary social |
+
+Copy hint on interact: *"No recruiters, just hello."*
 
 **Replay:** "Explore again" resets to Act I or unlocks free-roam on completed path.
 
@@ -242,25 +258,39 @@ After Act VI, the path opens to a quiet overlook (mountains or city lights).
 
 | Layer | Behavior |
 |-------|----------|
-| **In-world** | Terminal, library, or archive room in Act VI — shows recent post titles + 1-line teasers |
+| **In-world** | Terminal in Act VI — shows **up to 3** most recent post titles + 1-line teasers |
 | **`/blog`** | Classic MDX blog (existing stack) — full posts, comments, reading time |
 | **Linking** | Teasers in 3D link to `/blog/[slug]`; `/blog` has minimal branded header back to journey |
+| **Few posts** | Show however many exist if fewer than 3; **"View all posts →"** always links to `/blog` |
 
 The journey sells curiosity; the blog satisfies depth.
 
 ---
 
-## Controls
+## Locomotion — vehicle + dismount
 
-| Platform | Look | Move | Interact |
-|----------|------|------|----------|
-| **Desktop** | Mouse drag | Scroll forward on path or WASD in zone bounds | Click objects |
-| **Mobile** | Touch drag | Swipe forward / virtual stick in zone | Tap objects |
+**Default:** Low-poly **mountain jeep / pickup** on the open path (Bhutan road-trip feel — not a circus buggy).
+
+**Auto-dismount zones** — visitor exits the jeep and moves on foot in bounded areas:
+
+| Act | Why on foot |
+|-----|-------------|
+| **I** | Night classroom interior |
+| **IV** | Corn-field makeshift shelter |
+| **VI** | Office rooms (Selise, Jaggle, future wing) |
+
+**Re-mount:** Jeep waiting at zone exit; path driving resumes automatically.
+
+| Platform | Look | Driving | On foot | Interact |
+|----------|------|---------|---------|----------|
+| **Desktop** | Mouse drag | WASD / arrow keys | WASD in bounded interior | Click objects |
+| **Mobile** | Touch drag | Virtual wheel or touch-drag steer | Tap-to-move or simplified stick | Tap objects |
 
 **Constraints:**
 - Visitor cannot get lost off-path permanently
 - Camera bounds per act
 - Large touch targets (min 44px equivalent)
+- Mobile: lower max speed, larger steer touch zone
 
 ---
 
@@ -274,6 +304,38 @@ Humor lives in layers 2–3. Mental health jokes only where STORY.md allows — 
 
 ---
 
+## Sound design
+
+**Scope:** Ambient bed + light act accents — not full unique music per act.
+
+| Layer | Behavior |
+|-------|----------|
+| **Global ambient** | Quiet loop (wind, distant tone); optional; off by default on first visit |
+| **Act accents** | I: silence/stars · II: campus air · III: storm/rain · IV: corn rustle + distant animals · V: café murmur · VI: soft office hum |
+| **Interactables** | Short one-shots — radio click, calendar chime, terminal keystroke |
+| **Mute toggle** | Always visible in DOM overlay |
+| **Reduced motion** | `prefers-reduced-motion: reduce` → auto-mute + offer lite path |
+
+Sound supports mood; it never blocks story progression.
+
+---
+
+## Lite-path fallback
+
+**Lite path** = pre-rendered act snapshots + DOM lore panels (same story, no live 3D).
+
+| Trigger | Action |
+|---------|--------|
+| WebGL unavailable or context lost | **Auto-lite** immediately |
+| `navigator.hardwareConcurrency < 4` **and** mobile | **Suggest** lite on first load |
+| FPS **< 30 for 3 consecutive seconds** | Non-blocking banner: *"Switch to lite experience?"* |
+| `prefers-reduced-motion: reduce` | Offer lite + auto-mute |
+| User chooses "Lite mode" in settings | Manual toggle anytime |
+
+**Do not auto-lite** on capable phones — full 3D remains the default when performance is acceptable.
+
+---
+
 ## Visual direction — 3D low-poly
 
 **Reference:** [Bruno Simon](https://bruno-simon.com) — playful 3D world, driving/exploring, polished feel on desktop.
@@ -281,7 +343,7 @@ Humor lives in layers 2–3. Mental health jokes only where STORY.md allows — 
 **Style notes:**
 - Low-poly Bhutan geography — mountains, dzong silhouettes, village fields, city blocks
 - Warm act palettes: cool stars → green campus → gray storm → golden corn → neutral grind → sharp city
-- Consistent character scale — optional low-poly avatar or first-person vehicle (decide in Phase 2)
+- Consistent character scale — low-poly mountain jeep on path; on-foot avatar in dismount zones
 
 **Mobile performance strategy (non-negotiable):**
 - Cap `devicePixelRatio` (e.g. max 1.5 on mobile)
@@ -289,7 +351,7 @@ Humor lives in layers 2–3. Mental health jokes only where STORY.md allows — 
 - Instanced meshes for repeated objects (corn, trees)
 - Reduced shadow quality on mobile; baked lighting where possible
 - Touch-optimized UI overlays in DOM, not 3D text
-- Detect low-end devices → optional "lite path" (pre-rendered snapshots + DOM lore panels)
+- Detect low-end devices → lite path per thresholds above
 - Target 60fps on mid-range phones; 30fps floor with graceful degradation
 
 ---
@@ -307,6 +369,8 @@ Humor lives in layers 2–3. Mental health jokes only where STORY.md allows — 
 | Test terminal + comment | VI |
 | Gantt bars | VI |
 | Receipt (split) | VI |
+| Mountain jeep | Path (all acts) |
+| Postcard rack | End overlook |
 | Certificates + laptop | I, IV, VI |
 
 ---
@@ -324,10 +388,10 @@ Humor lives in layers 2–3. Mental health jokes only where STORY.md allows — 
 
 | Phase | Scope |
 |-------|-------|
-| **3a — Foundation** | R3F canvas, path locomotion, Act I opening, mobile DPR cap |
+| **3a — Foundation** | R3F canvas, jeep locomotion + dismount, Act I opening, mobile DPR cap |
 | **3b — Story acts** | Acts I–IV (core narrative + corn field) |
-| **3c — Professional** | Acts V–VI, blog terminal teaser |
-| **3d — Polish** | Sound, Easter eggs, lite fallback, replay |
+| **3c — Professional** | Acts V–VI, blog terminal (3 teasers), postcard rack |
+| **3d — Polish** | Sound accents, Easter eggs, lite fallback, replay |
 
 Library choices (R3F, drei, postprocessing, GSAP, etc.) are decided in **Phase 3 — Tech Plan**, not here.
 
@@ -344,10 +408,14 @@ A visitor can:
 
 ---
 
-## Open items (Phase 2)
+## Phase 2 — Locked ✓
 
-- [ ] Avatar: on-foot vs small vehicle (Bruno-style buggy?)
-- [ ] Sound design scope: ambient only vs act themes
-- [ ] "Say hi" contact method
-- [ ] Lite-path fallback trigger thresholds
-- [ ] Exact blog teaser count in-world (3 vs 5 posts)
+All open items resolved:
+
+- [x] **Locomotion** — Vehicle + dismount (mountain jeep; on foot in Acts I, IV, VI interiors)
+- [x] **Sound** — Ambient bed + act accents; mute toggle; reduced-motion auto-mute
+- [x] **Say hi** — Postcard rack: X (primary), GitHub, Facebook
+- [x] **Lite fallback** — Auto on WebGL failure; prompt on sustained low FPS or weak mobile; manual toggle
+- [x] **Blog teasers** — Latest 3 in Act VI terminal + always "View all → `/blog`"
+
+**Next:** Phase 3 — Tech Plan (libraries, folder structure, first sprint).
