@@ -1,0 +1,25 @@
+---
+alwaysApply: false + globs: src/**/*.{tsx,ts}
+description: React component patterns for dorji-dev
+---
+
+## React Component Rules
+
+- Build components around one clear responsibility. If a component starts mixing unrelated UI, data loading, mutation logic, and formatting logic, split it.
+- Prefer composition over configuration-heavy components. Add props only when a real caller needs them.
+- Keep props explicit and typed with a local `type ComponentNameProps = { ... }` unless the repo already uses a shared type.
+- For new feature components, use an arrow function with a default export pattern.
+- A single file should export only one default component.
+- If a new feature requires multiple components, create a feature folder with an `index.tsx` top-level component and place related components in separate files inside that folder.
+- The `src/components/ui` folder is the only exception: shared UI primitive files may export multiple related components from a single file.
+- Use clear callback prop names such as `onClose`, `onSubmit`, `onOpenTask`, and `onValueChange`.
+- Keep derived values derived. Do not store values in state when they can be computed from props, query data, or existing state.
+- Put state in the closest component that owns the interaction and pass data down through props.
+- Keep render logic pure. Do not mutate props, query data, module-level values, or objects from external stores during render.
+- Keep event handlers responsible for user-triggered mutations, navigation, analytics, and imperative actions.
+- Avoid unnecessary `useEffect`. Use effects for synchronizing with external systems, subscriptions, timers, browser APIs, or imperative integrations.
+- Do not use `useEffect` to derive state from other state or props when a computed value, memo, or event handler is enough.
+- Use `useMemo` and `useCallback` for meaningful stability or expensive work, not by default.
+- When mapping lists, use stable domain IDs for `key`. Avoid array indexes unless the list is static and never reordered.
+- Keep conditional rendering readable. Prefer small extracted components over deeply nested JSX.
+- For loading, empty, error, disabled, and permission states, make the state explicit in the UI when the user would otherwise be confused.
