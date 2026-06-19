@@ -393,7 +393,7 @@ Sound supports mood; it never blocks story progression.
 | **3c — Professional** | Acts V–VI, blog terminal (3 teasers), postcard rack |
 | **3d — Polish** | Sound accents, Easter eggs, lite fallback, replay |
 
-Library choices (R3F, drei, postprocessing, GSAP, etc.) are decided in **Phase 3 — Tech Plan**, not here.
+Library choices and full implementation details: [TECH_PLAN.md](./TECH_PLAN.md) (Yarn for all package installs).
 
 ---
 
@@ -418,4 +418,4 @@ All open items resolved:
 - [x] **Lite fallback** — Auto on WebGL failure; prompt on sustained low FPS or weak mobile; manual toggle
 - [x] **Blog teasers** — Latest 3 in Act VI terminal + always "View all → `/blog`"
 
-**Next:** Phase 3 — Tech Plan (libraries, folder structure, first sprint).
+**Next:** Sprint 3a — see [TECH_PLAN.md](./TECH_PLAN.md). Reply `start 3a` when ready to implement.
