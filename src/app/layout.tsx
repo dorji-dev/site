@@ -22,8 +22,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: "Dorji Tshering",
-  description:
-    "Self-taught frontend engineer from Trashigang, Bhutan. Building the project management UI at Jaggle.AI.",
+  description: "Self-taught software engineer/developer from Bhutan",
 };
 
 export default function RootLayout({
