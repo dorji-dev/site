@@ -2,25 +2,73 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #121417;
+  --muted: #6b7280;
+  --accent: #1a5f4f;
+  --surface: #f3f4f6;
+  --post: #ffffff;
+  --rule: color-mix(in srgb, var(--foreground) 12%, transparent);
+  --tone-bio: #1a5f4f;
+  --tone-now: #3d5a80;
+  --tone-philosophy: #6b5675;
+  --tone-connect: #6a6340;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-post: var(--post);
+  --color-rule: var(--rule);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display-face);
+  --font-mono: var(--font-mono-face);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
+  min-height: 100dvh;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  background: var(--background);
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 4px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 26%, white);
+  color: var(--foreground);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.section-tone-bio {
+  color: var(--tone-bio);
+}
+
+.section-tone-now {
+  color: var(--tone-now);
+}
+
+.section-tone-philosophy {
+  color: var(--tone-philosophy);
+}
+
+.section-tone-connect {
+  color: var(--tone-connect);
 }
