@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Source_Sans_3, Syne } from "next/font/google";
+import { Cormorant_Garamond, Great_Vibes } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
   variable: "--font-display-face",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
 });
 
-const sourceSans = Source_Sans_3({
+const cormorant = Cormorant_Garamond({
+  weight: ["500", "600"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
   variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-mono-face",
-  subsets: ["latin"],
-  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -31,12 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${syne.variable} ${sourceSans.variable} ${ibmPlexMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" className={`${greatVibes.variable} ${cormorant.variable}`}>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

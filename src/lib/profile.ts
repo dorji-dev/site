@@ -76,7 +76,7 @@ export const connectLinks = [
   {
     id: "x",
     label: "X",
-    href: "https://x.com/DorjiBolt",
+    href: "https://x.com/dorji__",
   },
   {
     id: "facebook",

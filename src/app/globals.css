@@ -1,30 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #121417;
-  --muted: #6b7280;
-  --accent: #1a5f4f;
-  --surface: #f3f4f6;
-  --post: #ffffff;
-  --rule: color-mix(in srgb, var(--foreground) 12%, transparent);
-  --tone-bio: #1a5f4f;
-  --tone-now: #3d5a80;
-  --tone-philosophy: #6b5675;
-  --tone-connect: #6a6340;
+  --background: #e7c48a;
+  --foreground: #3c2714;
+  --ink: #3c2714;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-surface: var(--surface);
-  --color-post: var(--post);
-  --color-rule: var(--rule);
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display-face);
-  --font-mono: var(--font-mono-face);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-body), Georgia, "Times New Roman", serif;
+  --font-display: var(--font-display-face), Georgia, serif;
 }
 
 html {
@@ -34,41 +21,108 @@ html {
 body {
   min-height: 100dvh;
   color: var(--foreground);
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   background: var(--background);
 }
 
 a {
   color: inherit;
-  text-underline-offset: 4px;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 26%, white);
+  background: #fff1c9;
   color: var(--foreground);
 }
 
-.scrollbar-none {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+.sand {
+  background-color: #e7c48a;
+  background-image:
+    radial-gradient(ellipse 90% 45% at 10% 0%, rgba(255, 244, 214, 0.55), transparent 62%),
+    radial-gradient(ellipse 70% 40% at 100% 85%, rgba(168, 104, 42, 0.28), transparent 58%),
+    radial-gradient(rgba(92, 54, 18, 0.14) 0.7px, transparent 0.8px),
+    radial-gradient(rgba(255, 236, 196, 0.4) 0.45px, transparent 0.55px);
+  background-size:
+    auto,
+    auto,
+    6px 6px,
+    11px 11px;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    3px 4px;
 }
 
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
+.sand-copy {
+  font-size: 1.35rem;
+  font-style: italic;
+  line-height: 1.45;
+  text-shadow: 0 1px 0 rgba(255, 236, 196, 0.35);
 }
 
-.section-tone-bio {
-  color: var(--tone-bio);
+@media (min-width: 640px) {
+  .sand-copy {
+    font-size: 1.5rem;
+  }
 }
 
-.section-tone-now {
-  color: var(--tone-now);
+.sand-link {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, var(--ink) 45%, transparent);
+  text-underline-offset: 0.14em;
 }
 
-.section-tone-philosophy {
-  color: var(--tone-philosophy);
+.sand-link:hover {
+  text-decoration-color: var(--ink);
 }
 
-.section-tone-connect {
-  color: var(--tone-connect);
+@keyframes sand-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes sand-foam {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-6%, 0, 0);
+  }
+}
+
+.sand-drift {
+  animation: sand-drift 18s ease-in-out infinite;
+}
+
+.sand-drift-slow {
+  animation-duration: 26s;
+}
+
+.sand-drift-late {
+  animation-duration: 22s;
+  animation-delay: -8s;
+}
+
+.sand-foam-wave {
+  animation: sand-foam 18s ease-in-out infinite;
+}
+
+.sand-foam-wave-slow {
+  animation: sand-foam 26s ease-in-out infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sand-drift,
+  .sand-foam-wave,
+  .sand-foam-wave-slow {
+    animation: none;
+  }
 }

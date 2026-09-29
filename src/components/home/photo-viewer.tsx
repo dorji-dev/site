@@ -33,7 +33,7 @@ const PhotoViewer = ({ onClose }: PhotoViewerProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/90 p-4 sm:p-8"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#3c2714]/90 p-4 sm:p-10"
       role="dialog"
       aria-modal="true"
       aria-label={alt}
@@ -43,13 +43,12 @@ const PhotoViewer = ({ onClose }: PhotoViewerProps) => {
         ref={closeRef}
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 border border-white/25 bg-foreground/40 px-3 py-1.5 font-mono text-[11px] tracking-wide text-white uppercase transition-colors hover:bg-foreground/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="absolute top-4 right-5 font-display text-4xl text-[#f6e7c4] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6e7c4]"
       >
         Close
       </button>
-
       <div
-        className="relative h-[min(90dvh,900px)] w-[min(92vw,720px)]"
+        className="relative h-[min(88dvh,900px)] w-[min(92vw,720px)]"
         onClick={(event) => event.stopPropagation()}
       >
         {src ? (

@@ -1,22 +1,18 @@
-const sectionTones = {
-  bio: "section-tone-bio",
-  now: "section-tone-now",
-  philosophy: "section-tone-philosophy",
-  connect: "section-tone-connect",
+const labels = {
+  bio: "Bio",
+  now: "Now",
+  philosophy: "Philosophy",
+  connect: "Connect",
 } as const;
 
-type SectionTone = keyof typeof sectionTones;
-
 type SectionHeadingProps = {
-  label: SectionTone;
+  label: keyof typeof labels;
 };
 
 const SectionHeading = ({ label }: SectionHeadingProps) => {
   return (
-    <h2
-      className={`font-mono text-[12px] font-medium tracking-normal ${sectionTones[label]}`}
-    >
-      <span aria-hidden>#</span> <span className="lowercase">{label}</span>
+    <h2 className="font-display text-[2.6rem] leading-none text-ink sm:text-5xl">
+      {labels[label]}
     </h2>
   );
 };

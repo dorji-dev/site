@@ -3,17 +3,11 @@ import { philosophy } from "@/lib/profile";
 
 const Philosophy = () => {
   return (
-    <section className="space-y-4">
+    <section className="space-y-3 border-b border-ink/30 pb-8">
       <SectionHeading label="philosophy" />
-      <ul className="space-y-3 text-[17px] leading-[1.65] text-foreground/90">
+      <ul className="sand-copy space-y-2">
         {philosophy.map((item) => (
-          <li key={item.id} className="flex gap-3">
-            <span
-              aria-hidden
-              className="mt-[0.7em] size-1 shrink-0 rounded-full bg-accent"
-            />
-            <span>{item.text}</span>
-          </li>
+          <li key={item.id}>{item.text}</li>
         ))}
       </ul>
     </section>
