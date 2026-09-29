@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import Bio from "@/components/home/bio";
 import Connect from "@/components/home/connect";
 import Now from "@/components/home/now";
@@ -6,91 +5,62 @@ import Philosophy from "@/components/home/philosophy";
 import Portrait from "@/components/home/portrait";
 import Post from "@/components/home/post";
 
-const Shell = ({
-  className,
-  children,
-}: {
-  className: string;
-  children: ReactNode;
-}) => {
+const Ring = ({ className }: { className: string }) => {
   return (
-    <svg aria-hidden viewBox="0 0 64 48" className={`text-[#f3e2b8] ${className}`}>
-      {children}
+    <svg aria-hidden viewBox="0 0 120 120" className={className}>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#c4a06a" strokeWidth="1.2" />
+      <circle cx="60" cy="60" r="28" fill="none" stroke="#a67c52" strokeWidth="1" />
     </svg>
+  );
+};
+
+const Arc = ({ className }: { className: string }) => {
+  return (
+    <svg aria-hidden viewBox="0 0 160 80" className={className}>
+      <path
+        d="M8 64C28 18 88 8 152 36"
+        fill="none"
+        stroke="#c4a06a"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+};
+
+const SidePanel = ({ side }: { side: "left" | "right" }) => {
+  const isLeft = side === "left";
+
+  return (
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute inset-y-0 hidden w-[calc((100%-var(--container-xl))/2)] overflow-hidden lg:block ${isLeft ? "left-0" : "right-0"}`}
+    >
+      <div className={`sand-drift-soft absolute top-[14%] w-28 ${isLeft ? "left-[16%]" : "right-[18%]"}`}>
+        {isLeft ? <Ring className="w-full" /> : <Arc className="w-full" />}
+      </div>
+      <div className={`sand-drift-soft absolute top-[48%] w-32 ${isLeft ? "right-[10%]" : "left-[12%]"}`}>
+        {isLeft ? <Arc className="w-full" /> : <Ring className="w-full opacity-80" />}
+      </div>
+      <span
+        className={`sand-drift absolute top-[32%] size-2 rounded-full bg-[#c4a06a]/80 ${isLeft ? "left-[42%]" : "right-[36%]"}`}
+      />
+      <span
+        className={`sand-drift sand-drift-late absolute top-[72%] size-1.5 rounded-full bg-[#a67c52] ${isLeft ? "left-[28%]" : "right-[24%]"}`}
+      />
+      <span
+        className={`sand-drift-soft absolute top-[78%] h-px w-10 bg-[#c4a06a]/70 ${isLeft ? "left-[18%]" : "right-[16%]"}`}
+      />
+    </div>
   );
 };
 
 const Decor = () => {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      <span className="sand-drift absolute top-5 right-3 size-2.5 rounded-full bg-[#fff4d6]/70 sm:right-6 sm:size-3" />
-      <span className="sand-drift sand-drift-late absolute top-14 right-6 h-0.5 w-8 rounded-full bg-[#fff4d6]/55 sm:right-10" />
-      <span className="sand-drift sand-drift-slow absolute bottom-32 left-3 size-2 rounded-full bg-[#f6e2b0]/80" />
-
-      <div className="sand-drift absolute top-24 left-[5%] hidden lg:block">
-        <Shell className="w-10 -rotate-12">
-          <path
-            d="M8 30c8-16 18-22 24-22s16 6 24 22c-8 4-16 6-24 6s-16-2-24-6Z"
-            fill="currentColor"
-            stroke="#c4a06a"
-            strokeWidth="1.2"
-          />
-          <path d="M32 10v26" fill="none" stroke="#c4a06a" strokeWidth="1" />
-        </Shell>
-      </div>
-      <div className="sand-drift sand-drift-slow absolute top-[38%] right-[6%] hidden lg:block">
-        <Shell className="w-8 rotate-12">
-          <path
-            d="M10 34c6-18 14-24 22-24 2 8 2 16 0 24-6 2-14 2-22 0Z"
-            fill="currentColor"
-            stroke="#c4a06a"
-            strokeWidth="1.2"
-          />
-        </Shell>
-      </div>
-      <div className="sand-drift sand-drift-late absolute bottom-40 left-[8%] hidden lg:block">
-        <Shell className="w-7 rotate-6">
-          <path
-            d="M12 32c7-14 14-18 20-18s13 4 20 18c-7 3-13 4-20 4s-13-1-20-4Z"
-            fill="currentColor"
-            stroke="#c4a06a"
-            strokeWidth="1.2"
-          />
-        </Shell>
-      </div>
-
-      <span className="sand-drift sand-drift-late absolute top-36 left-[9%] hidden size-4 rounded-full bg-[#fff6dc]/50 lg:block" />
-      <span className="sand-drift absolute top-[28%] right-[8%] hidden h-0.5 w-12 -rotate-6 rounded-full bg-[#fff4d6]/50 lg:block" />
-      <span className="sand-drift sand-drift-slow absolute bottom-52 right-[10%] hidden size-3 rounded-full bg-[#f3d7a2]/70 lg:block" />
-      <span className="sand-drift sand-drift-late absolute bottom-28 left-[14%] hidden h-0.5 w-10 rotate-3 rounded-full bg-[#fff4d6]/45 lg:block" />
-    </div>
-  );
-};
-
-const Foam = () => {
-  return (
-    <div aria-hidden className="relative z-10 -mt-8 h-36 overflow-hidden sm:h-44">
-      <svg
-        viewBox="0 0 1440 220"
-        preserveAspectRatio="none"
-        className="sand-foam-wave absolute top-0 -left-[8%] h-full w-[116%]"
-      >
-        <path
-          fill="#f7f1e4"
-          d="M0 120c120 40 200-20 320-10s180 50 300 30 200-60 320-40 220 50 320 30 120-40 180-20v110H0Z"
-        />
-      </svg>
-      <svg
-        viewBox="0 0 1440 220"
-        preserveAspectRatio="none"
-        className="sand-foam-wave-slow absolute top-3 -left-[8%] h-full w-[116%]"
-      >
-        <path
-          fill="#fffaf2"
-          opacity="0.9"
-          d="M0 150c140 30 220-10 340 0s180 40 300 16 210-46 330-20 200 40 300 18 110-30 170-10v66H0Z"
-        />
-      </svg>
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden lg:hidden">
+      <span className="sand-drift absolute top-5 right-3 size-2.5 rounded-full bg-[#c4a06a]/70 sm:right-6 sm:size-3" />
+      <span className="sand-drift sand-drift-late absolute top-14 right-6 h-0.5 w-8 rounded-full bg-[#c4a06a]/55 sm:right-10" />
+      <span className="sand-drift sand-drift-slow absolute bottom-32 left-3 size-2 rounded-full bg-[#a67c52]/80" />
     </div>
   );
 };
@@ -99,6 +69,8 @@ const Home = () => {
   return (
     <div className="sand relative min-h-dvh overflow-x-clip">
       <Decor />
+      <SidePanel side="left" />
+      <SidePanel side="right" />
       <Post>
         <Bio />
         <Now />
@@ -106,7 +78,6 @@ const Home = () => {
         <Connect />
         <Portrait />
       </Post>
-      <Foam />
     </div>
   );
 };

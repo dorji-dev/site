@@ -20,7 +20,7 @@ export const profile = {
     role: "Associate Frontend Engineer",
   },
   education: {
-    school: "NIT Kurukshetra",
+    school: "NIT Kurukshetra, India",
     program: "B.Tech Mechanical Engineering",
   },
   firstProject: {
