@@ -25,7 +25,7 @@ const Portrait = () => {
         type="button"
         onClick={() => setIsOpen(true)}
         aria-label={`View full photo of ${alt}`}
-        className="relative block aspect-square w-full max-w-[220px] cursor-zoom-in overflow-hidden shadow-[0_10px_18px_rgba(74,42,16,0.28)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
+        className="relative block aspect-square w-full max-w-[200px] cursor-zoom-in overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
       >
         <Image
           src={src}

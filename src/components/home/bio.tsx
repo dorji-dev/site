@@ -7,7 +7,7 @@ const Bio = () => {
       href={profile.firstProject.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="sand-link"
+      className="underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-950"
     >
       {profile.firstProject.name}
     </a>
@@ -16,9 +16,9 @@ const Bio = () => {
   );
 
   return (
-    <section className="space-y-3 border-b border-ink/30 pb-8">
+    <section className="space-y-3 border-b border-neutral-200 pb-8">
       <SectionHeading label="bio" />
-      <div className="sand-copy space-y-3">
+      <div className="space-y-4 text-base leading-7">
         <p>
           I&apos;m a self-taught frontend engineer from {profile.hometown}. I
           work at{" "}
@@ -26,7 +26,7 @@ const Bio = () => {
             href={profile.company.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="sand-link"
+            className="underline decoration-neutral-300 underline-offset-4 hover:decoration-neutral-950"
           >
             {profile.company.name}
           </a>

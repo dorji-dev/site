@@ -45,7 +45,7 @@ const Engagement = () => {
 
   return (
     <footer className="mt-10">
-      <p className="text-2xl italic text-ink/80">
+      <p className="text-sm text-neutral-500">
         <span className="tabular-nums">{viewsLabel}</span> views
       </p>
     </footer>

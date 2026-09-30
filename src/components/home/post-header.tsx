@@ -12,13 +12,9 @@ const PostHeader = () => {
 
   return (
     <header>
-      <h1 className="font-display text-[4.25rem] leading-[0.85] text-ink sm:text-8xl">
-        {name}
-      </h1>
-      <p className="mt-4 text-[1.45rem] leading-snug text-balance italic sm:text-3xl">
-        {role}
-      </p>
-      <p className="mt-2 text-xl italic text-ink/75">
+      <h1 className="text-3xl font-medium tracking-tight text-ink">{name}</h1>
+      <p className="mt-2 text-base text-neutral-600">{role}</p>
+      <p className="mt-1 text-sm text-neutral-500">
         Posted on {formatPostedAt(postedAt)}
       </p>
     </header>

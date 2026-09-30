@@ -11,7 +11,7 @@ type SectionHeadingProps = {
 
 const SectionHeading = ({ label }: SectionHeadingProps) => {
   return (
-    <h2 className="font-display text-[2.6rem] leading-none text-ink sm:text-5xl">
+    <h2 className="text-sm font-medium text-neutral-500">
       {labels[label]}
     </h2>
   );

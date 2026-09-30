@@ -43,7 +43,7 @@ const PhotoViewer = ({ onClose }: PhotoViewerProps) => {
         ref={closeRef}
         type="button"
         onClick={onClose}
-        className="absolute top-4 right-5 font-display text-4xl text-[#f6e7c4] transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#f6e7c4]"
+        className="absolute top-4 right-5 text-sm text-white underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
       >
         Close
       </button>

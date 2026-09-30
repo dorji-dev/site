@@ -3,9 +3,9 @@ import { profile } from "@/lib/profile";
 
 const Now = () => {
   return (
-    <section className="space-y-3 border-b border-ink/30 pb-8">
+    <section className="space-y-3 border-b border-neutral-200 pb-8">
       <SectionHeading label="now" />
-      <p className="sand-copy">{profile.now}</p>
+      <p className="text-base leading-7">{profile.now}</p>
     </section>
   );
 };
