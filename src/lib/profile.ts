@@ -21,7 +21,6 @@ export const profile = {
   },
   education: {
     school: "NIT Kurukshetra, India",
-    program: "B.Tech Mechanical Engineering",
   },
   image: {
     src: "/dorji.jpg",

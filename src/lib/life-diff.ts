@@ -185,8 +185,5 @@ export const lifeDiff = {
   path: "life.yml",
   additions,
   deletions,
-  sha: "2019c0d",
-  base: "mechanical",
-  head: "frontend",
   hunks,
 };
