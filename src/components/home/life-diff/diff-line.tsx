@@ -1,5 +1,15 @@
 import { CheckIcon, LinkIcon } from "@primer/octicons-react";
-import type { DiffLine as DiffLineData, DiffToken } from "@/lib/life-diff";
+import {
+  KEY_COLUMN,
+  type DiffLine as DiffLineData,
+  type DiffToken,
+} from "@/lib/life-diff";
+
+// Hanging indent: wrapped values line up under the value, not the key.
+const hangingIndent = {
+  paddingLeft: `${KEY_COLUMN}ch`,
+  textIndent: `-${KEY_COLUMN}ch`,
+};
 
 type DiffLineProps = {
   line: DiffLineData;
@@ -110,7 +120,7 @@ const DiffLine = ({
       <button
         type="button"
         onClick={onSelect}
-        className={`hidden text-right font-mono tabular-nums sm:block ${numClass(line.kind, selected)} pr-2`}
+        className={`hidden items-start justify-end font-mono tabular-nums sm:flex ${numClass(line.kind, selected)} pr-2`}
         aria-label={`Select old line ${line.oldNo ?? "none"}`}
       >
         {line.oldNo ?? ""}
@@ -118,7 +128,7 @@ const DiffLine = ({
       <button
         type="button"
         onClick={onSelect}
-        className={`text-right font-mono tabular-nums ${numClass(line.kind, selected)} pr-1.5 sm:pr-2`}
+        className={`flex items-start justify-end font-mono tabular-nums ${numClass(line.kind, selected)} pr-1.5 sm:pr-2`}
         aria-label={`Select line ${line.newNo ?? line.oldNo ?? line.id}`}
       >
         <span className="sm:hidden">{line.newNo ?? line.oldNo ?? ""}</span>
@@ -127,7 +137,10 @@ const DiffLine = ({
       <span aria-hidden className="font-mono text-mist">
         {signFor(line.kind)}
       </span>
-      <p className="min-w-0 pr-3 font-mono whitespace-pre text-ink">
+      <p
+        className="min-w-0 pr-3 font-mono whitespace-pre-wrap text-ink [overflow-wrap:anywhere]"
+        style={hangingIndent}
+      >
         <DiffTokens tokens={line.tokens} />
       </p>
       <button

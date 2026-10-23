@@ -57,6 +57,9 @@ type HunkDraft = {
 
 const KEY_WIDTH = 9;
 
+// Character width of the padded `key:` column; wrapped values indent to it.
+export const KEY_COLUMN = KEY_WIDTH + 2;
+
 const del = (id: string, key: string, value: string, paired = true): LineDraft =>
   ({ id, kind: "del", key, value, paired });
 
@@ -142,7 +145,7 @@ const build = () => {
       oldNo: draft.kind === "add" ? null : ++oldNo,
       newNo: draft.kind === "del" ? null : ++newNo,
       tokens: [
-        { text: `${draft.key}:`.padEnd(KEY_WIDTH + 2) },
+        { text: `${draft.key}:`.padEnd(KEY_COLUMN) },
         { text: draft.value, mark, href: draft.href },
       ],
     };

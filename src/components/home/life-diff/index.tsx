@@ -66,7 +66,7 @@ const LifeDiff = () => {
           onToggleNotes={() => setNotesHidden((value) => !value)}
           onToggleViewed={() => setViewed((value) => !value)}
         />
-        <div className={viewed ? "hidden" : "overflow-x-auto"}>
+        <div className={viewed ? "hidden" : undefined}>
           {lifeDiff.hunks.map((hunk) => (
             <Hunk
               key={hunk.id}
