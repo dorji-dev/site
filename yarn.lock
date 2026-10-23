@@ -791,6 +791,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@primer/octicons-react@npm:19.41.0":
+  version: 19.41.0
+  resolution: "@primer/octicons-react@npm:19.41.0"
+  peerDependencies:
+    react: ">=16.3"
+  checksum: 10c0/e0b3af4ae008540298391f1591d5f243abd89a81766572569119065bc4e8fc62676d7a6d33ad6e76e20e541f806f13f1a27fab7790203a1401b0b6cd231165b3
+  languageName: node
+  linkType: hard
+
 "@rtsao/scc@npm:^1.1.0":
   version: 1.1.0
   resolution: "@rtsao/scc@npm:1.1.0"
@@ -3633,6 +3642,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "project@workspace:."
   dependencies:
+    "@primer/octicons-react": "npm:19.41.0"
     "@tailwindcss/postcss": "npm:^4"
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"

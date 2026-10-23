@@ -33,7 +33,7 @@ const PhotoViewer = ({ onClose }: PhotoViewerProps) => {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#3c2714]/90 p-4 sm:p-10"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-10"
       role="dialog"
       aria-modal="true"
       aria-label={alt}

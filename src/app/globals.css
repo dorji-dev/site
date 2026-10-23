@@ -2,19 +2,95 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-  --ink: #171717;
+  --foreground: #1f2328;
+  --ink: #1f2328;
+  --mist: #59636e;
+  --line: #d1d9e0;
+  --surface: #f6f8fa;
+  --accent: #0969da;
+  --success: #1a7f37;
+  --success-emphasis: #1f883d;
+  --danger: #d1242f;
+  --done: #8250df;
+  --diff-header: #f6f8fa;
+  --diff-hunk: #ddf4ff;
+  --diff-hunk-hover: #b6e3ff;
+  --diff-hunk-text: #0969da;
+  --diff-add: #e6ffec;
+  --diff-add-num: #ccffd8;
+  --diff-add-word: #abf2c3;
+  --diff-del: #ffebe9;
+  --diff-del-num: #ffcecb;
+  --diff-del-word: #ff818266;
+  --diff-select: #fff8c5;
+  --selection: #ddf4ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0d1117;
+    --foreground: #f0f6fc;
+    --ink: #f0f6fc;
+    --mist: #9198a1;
+    --line: #3d444d;
+    --surface: #151b23;
+    --accent: #4493f8;
+    --success: #3fb950;
+    --success-emphasis: #238636;
+    --danger: #f85149;
+    --done: #ab7df8;
+    --diff-header: #151b23;
+    --diff-hunk: #121d2f;
+    --diff-hunk-hover: #1a2a44;
+    --diff-hunk-text: #9198a1;
+    --diff-add: #2ea04326;
+    --diff-add-num: #3fb9504d;
+    --diff-add-word: #2ea04366;
+    --diff-del: #f851491a;
+    --diff-del-num: #f8514940;
+    --diff-del-word: #f8514966;
+    --diff-select: #bb800926;
+    --selection: #1f6feb66;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-ink: var(--ink);
+  --color-mist: var(--mist);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-success-emphasis: var(--success-emphasis);
+  --color-danger: var(--danger);
+  --color-done: var(--done);
+  --color-diff-header: var(--diff-header);
+  --color-diff-hunk: var(--diff-hunk);
+  --color-diff-hunk-hover: var(--diff-hunk-hover);
+  --color-diff-hunk-text: var(--diff-hunk-text);
+  --color-diff-add: var(--diff-add);
+  --color-diff-add-num: var(--diff-add-num);
+  --color-diff-add-word: var(--diff-add-word);
+  --color-diff-del: var(--diff-del);
+  --color-diff-del-num: var(--diff-del-num);
+  --color-diff-del-word: var(--diff-del-word);
+  --color-diff-select: var(--diff-select);
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-serif), "Iowan Old Style", Georgia, serif;
+  --font-mono: var(--font-code), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
 html {
-  color-scheme: light;
+  color-scheme: light dark;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -29,6 +105,6 @@ a {
 }
 
 ::selection {
-  background: #e5e5e5;
+  background: var(--selection);
   color: var(--foreground);
 }

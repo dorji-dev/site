@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@primer/octicons-react": "19.41.0",
     "@upstash/redis": "^1.38.4",
     "next": "16.3.4",
     "react": "19.2.8",

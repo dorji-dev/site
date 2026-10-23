@@ -44,11 +44,9 @@ const Engagement = () => {
   const viewsLabel = views !== null ? formatCount(views) : failed ? "—" : "…";
 
   return (
-    <footer className="mt-10">
-      <p className="text-sm text-neutral-500">
-        <span className="tabular-nums">{viewsLabel}</span> views
-      </p>
-    </footer>
+    <p>
+      <span className="tabular-nums">{viewsLabel}</span> views
+    </p>
   );
 };
 
