@@ -18,7 +18,7 @@ const Reviewers = () => {
     <section id="remotes" className="scroll-mt-8 pt-20 sm:pt-28">
       <SectionLabel>git remote -v</SectionLabel>
       <p className="mt-4 font-display text-[clamp(2rem,6vw,3.4rem)] leading-[1.05] tracking-[-0.03em] text-ink">
-        Ping me on{" "}
+        Open to work. Ping me on{" "}
         {connectLinks.map((link, index) => (
           <span key={link.id}>
             <a

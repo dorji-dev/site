@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Google_Sans, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
+import { getAvailability } from "@/lib/profile";
 import "./globals.css";
 
 const googleSans = Google_Sans({
@@ -20,11 +21,12 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-code",
 });
 
-export const metadata: Metadata = {
+export const dynamic = "force-dynamic";
+
+export const generateMetadata = (): Metadata => ({
   title: "Dorji Tshering",
-  description:
-    "Self-taught frontend engineer from Trashigang, based in Thimphu, Bhutan, building the frontend at Jaggle.AI. refactor: mechanical → frontend.",
-};
+  description: getAvailability().description,
+});
 
 export default function RootLayout({
   children,

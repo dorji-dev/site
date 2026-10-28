@@ -8,7 +8,7 @@ import {
 } from "@primer/octicons-react";
 import { RefText } from "@/components/home/branch-ref";
 import SectionLabel from "@/components/home/section-label";
-import { history, type Commit, type HistoryEvent } from "@/lib/history";
+import { getHistory, type Commit, type HistoryEvent } from "@/lib/history";
 
 type MilestoneEvent = Exclude<HistoryEvent, { kind: "commits" }>;
 
@@ -101,18 +101,7 @@ const Milestone = ({ event }: { event: MilestoneEvent }) => {
       <div className="min-w-0 pt-1">
         <p className="text-[15px] leading-6 text-ink">
           <span className="font-medium">dorji</span>{" "}
-          {event.href ? (
-            <a
-              href={event.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline hover:underline-offset-4"
-            >
-              <RefText text={event.title} />
-            </a>
-          ) : (
-            <RefText text={event.title} />
-          )}{" "}
+          <RefText text={event.title} href={event.href} />{" "}
           <span className="text-sm text-mist">· {event.when}</span>
           {event.kind === "head" ? (
             <span className="ml-2 rounded-full px-2 py-0.5 align-middle font-mono text-xs text-success ring-1 ring-success">
@@ -140,7 +129,8 @@ const CommitGroup = ({
           <GitCommitIcon size={16} />
         </span>
         <p className="text-sm text-mist">
-          {event.commits.length} commits · {event.when}
+          {event.commits.length}{" "}
+          {event.commits.length === 1 ? "commit" : "commits"} · {event.when}
         </p>
       </div>
       <ol className="mt-2 divide-y divide-line overflow-hidden rounded-lg border border-line bg-background sm:ml-12">
@@ -157,7 +147,7 @@ const CommitHistory = () => {
     <section id="commits" className="scroll-mt-8 pt-12">
       <SectionLabel aside="git log --graph">history</SectionLabel>
       <ol className="relative mt-6 before:absolute before:top-2 before:bottom-10 before:left-[15.5px] before:w-px before:bg-line">
-        {history.map((event) =>
+        {getHistory().map((event) =>
           event.kind === "commits" ? (
             <CommitGroup key={event.id} event={event} />
           ) : (

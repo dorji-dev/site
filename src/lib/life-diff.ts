@@ -1,4 +1,4 @@
-import { philosophy, profile } from "@/lib/profile";
+import { getAvailability, philosophy, profile } from "@/lib/profile";
 
 export type DiffMark = "add" | "del";
 
@@ -60,8 +60,12 @@ const KEY_WIDTH = 9;
 // Character width of the padded `key:` column; wrapped values indent to it.
 export const KEY_COLUMN = KEY_WIDTH + 2;
 
-const del = (id: string, key: string, value: string, paired = true): LineDraft =>
-  ({ id, kind: "del", key, value, paired });
+const del = (
+  id: string,
+  key: string,
+  value: string,
+  options: { paired?: boolean; href?: string } = {},
+): LineDraft => ({ id, kind: "del", key, value, paired: true, ...options });
 
 const add = (
   id: string,
@@ -73,14 +77,14 @@ const add = (
 const ctx = (id: string, key: string, value: string): LineDraft =>
   ({ id, kind: "ctx", key, value });
 
-const drafts: HunkDraft[] = [
+const getDrafts = (): HunkDraft[] => [
   {
     id: "whoami",
     label: "whoami",
     lines: [
       ctx("from", "from", `${profile.hometown}, Bhutan`),
       del("studied-old", "studied", "mechanical engineering"),
-      add("studied-new", "studied", "the web, mostly by myself", { paired: true }),
+      add("studied-new", "studied", "to code, mostly by myself", { paired: true }),
       del("based-old", "based", "Kurukshetra, India"),
       add("based-new", "based", profile.location, { paired: true }),
     ],
@@ -93,7 +97,7 @@ const drafts: HunkDraft[] = [
     id: "stack",
     label: "stack",
     lines: [
-      del("writes-old", "writes", "C (barely)"),
+      del("writes-old", "writes", "C, Java, Python"),
       add("writes-new", "writes", "TypeScript, React, Next.js, Angular", {
         paired: true,
       }),
@@ -105,14 +109,24 @@ const drafts: HunkDraft[] = [
     id: "work",
     label: "work",
     lines: [
-      del("team-old", "team", profile.previousCompany.name),
+      del("team-old", "team", profile.previousCompany.name, {
+        href: profile.previousCompany.url,
+      }),
       add("team-new", "team", profile.company.name, {
         paired: true,
         href: profile.company.url,
       }),
-      add("ships", "ships", "the frontend of a project workspace"),
+      add("shipped", "shipped", "the frontend of a project workspace"),
     ],
     notes: ["aiUnderstand", "aiTest"],
+  },
+  {
+    id: "now",
+    label: "now",
+    lines: [
+      add("status", "status", "open to work"),
+      add("from", "from", getAvailability().diffFrom),
+    ],
   },
   {
     id: "cares",
@@ -125,9 +139,9 @@ const drafts: HunkDraft[] = [
   },
 ];
 
-const noteKeys = drafts.flatMap((hunk) => hunk.notes ?? []);
-
 const build = () => {
+  const drafts = getDrafts();
+  const noteKeys = drafts.flatMap((hunk) => hunk.notes ?? []);
   let oldNo = 0;
   let newNo = 0;
   let additions = 0;
@@ -182,11 +196,13 @@ const build = () => {
   return { hunks, additions, deletions };
 };
 
-const { hunks, additions, deletions } = build();
+export const getLifeDiff = () => {
+  const { hunks, additions, deletions } = build();
 
-export const lifeDiff = {
-  path: "life.yml",
-  additions,
-  deletions,
-  hunks,
+  return {
+    path: "life.yml",
+    additions,
+    deletions,
+    hunks,
+  };
 };

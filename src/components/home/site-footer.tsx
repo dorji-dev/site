@@ -12,7 +12,7 @@ const SiteFooter = () => {
         <span aria-hidden className="hidden sm:inline">
           ·
         </span>
-        <p>working tree clean-ish · read-only</p>
+        <p>working tree clean-ish · open to work</p>
       </div>
     </footer>
   );

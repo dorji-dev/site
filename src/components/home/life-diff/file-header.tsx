@@ -1,7 +1,9 @@
 import { CommentIcon, FileIcon } from "@primer/octicons-react";
-import { lifeDiff } from "@/lib/life-diff";
 
 type FileHeaderProps = {
+  path: string;
+  additions: number;
+  deletions: number;
   notesHidden: boolean;
   viewed: boolean;
   onToggleNotes: () => void;
@@ -9,6 +11,9 @@ type FileHeaderProps = {
 };
 
 const FileHeader = ({
+  path,
+  additions,
+  deletions,
   notesHidden,
   viewed,
   onToggleNotes,
@@ -20,9 +25,9 @@ const FileHeader = ({
         <span className="text-mist">
           <FileIcon size={16} />
         </span>
-        <span className="font-medium text-ink">{lifeDiff.path}</span>
-        <span className="text-success">+{lifeDiff.additions}</span>
-        <span className="text-danger">−{lifeDiff.deletions}</span>
+        <span className="font-medium text-ink">{path}</span>
+        <span className="text-success">+{additions}</span>
+        <span className="text-danger">−{deletions}</span>
       </div>
       <div className="flex flex-wrap items-center gap-3 text-sm">
         <label className="flex cursor-pointer items-center gap-2 text-mist hover:text-ink">

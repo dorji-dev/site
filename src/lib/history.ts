@@ -1,4 +1,4 @@
-import { profile } from "@/lib/profile";
+import { getAvailability, profile } from "@/lib/profile";
 
 // Inline `code` spans in titles and bodies render as branch/ref pills.
 
@@ -34,7 +34,9 @@ export type HistoryEvent =
       href?: string;
     };
 
-export const history: HistoryEvent[] = [
+const buildHistory = (
+  availability: ReturnType<typeof getAvailability>,
+): HistoryEvent[] => [
   {
     id: "checkout",
     kind: "branch",
@@ -49,7 +51,7 @@ export const history: HistoryEvent[] = [
     commits: [
       {
         sha: "c0ffee1",
-        message: "chore: start over with C, one small problem at a time",
+        message: "chore: start over with C, then Java and Python",
       },
       {
         sha: "3eb0a1d",
@@ -104,6 +106,7 @@ export const history: HistoryEvent[] = [
     when: "Apr 2023",
     title: `merged into \`${profile.previousCompany.name}\``,
     body: `${profile.previousCompany.role} in ${profile.city}, after almost three years of teaching myself.`,
+    href: profile.previousCompany.url,
   },
   {
     id: "selise-work",
@@ -143,16 +146,30 @@ export const history: HistoryEvent[] = [
     href: profile.company.url,
   },
   {
+    id: "jaggle-work",
+    kind: "commits",
+    when: "late 2025 – 2026",
+    commits: [
+      {
+        sha: "b7e2c01",
+        message: "feat: List, Kanban, Gantt and Sprint views",
+        body: "Kept the boards fast on modest devices.",
+        href: profile.company.url,
+      },
+    ],
+  },
+  {
     id: "head",
     kind: "head",
-    when: "now",
-    title: "wip: the frontend of Jaggle.AI",
-    body: "List, Kanban, Gantt and Sprint views that stay fast on modest devices.",
-    href: profile.company.url,
+    when: availability.historyWhen,
+    title: "tagged `open-to-work`",
+    body: `${availability.started ? "Left" : "Leaving"} ${profile.company.name}. Open to frontend roles — remote, or here in Bhutan.`,
   },
 ];
 
-export const commitCount = history.reduce(
+export const getHistory = () => buildHistory(getAvailability());
+
+export const commitCount = getHistory().reduce(
   (count, event) =>
     count + (event.kind === "commits" ? event.commits.length : 1),
   0,

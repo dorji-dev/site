@@ -10,17 +10,36 @@ export const BranchRef = ({ children }: BranchRefProps) => {
   );
 };
 
+type RefTextProps = {
+  text: string;
+  href?: string;
+};
+
 // Renders `backtick` segments of a string as branch refs.
-export const RefText = ({ text }: { text: string }) => {
+export const RefText = ({ text, href }: RefTextProps) => {
   return (
     <>
-      {text.split("`").map((part, index) =>
-        index % 2 === 1 ? (
-          <BranchRef key={part}>{part}</BranchRef>
-        ) : (
-          part
-        ),
-      )}
+      {text.split("`").map((part, index) => {
+        if (index % 2 !== 1) {
+          return part;
+        }
+
+        if (!href) {
+          return <BranchRef key={part}>{part}</BranchRef>;
+        }
+
+        return (
+          <a
+            key={part}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline hover:underline-offset-4"
+          >
+            <BranchRef>{part}</BranchRef>
+          </a>
+        );
+      })}
     </>
   );
 };

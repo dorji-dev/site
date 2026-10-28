@@ -5,7 +5,7 @@ import {
   GlobeIcon,
   type Icon,
 } from "@primer/octicons-react";
-import { checks } from "@/components/home/merge-box";
+import { getChecks } from "@/components/home/merge-box";
 import { commitCount } from "@/lib/history";
 import { connectLinks } from "@/lib/profile";
 
@@ -19,7 +19,12 @@ type Tab = {
 const tabs: Tab[] = [
   { href: "#commits", label: "Commits", count: commitCount, icon: GitCommitIcon },
   { href: "#files", label: "Files changed", count: 1, icon: FileDiffIcon },
-  { href: "#checks", label: "Checks", count: checks.length, icon: ChecklistIcon },
+  {
+    href: "#checks",
+    label: "Checks",
+    count: getChecks().length,
+    icon: ChecklistIcon,
+  },
   { href: "#remotes", label: "Remotes", count: connectLinks.length, icon: GlobeIcon },
 ];
 

@@ -1,26 +1,38 @@
 import { CheckCircleFillIcon, CheckIcon, LockIcon } from "@primer/octicons-react";
 import SectionLabel from "@/components/home/section-label";
-import { profile } from "@/lib/profile";
+import { getAvailability, profile } from "@/lib/profile";
 
-export const checks = [
-  {
-    id: "self-taught",
-    name: "self-taught",
-    detail: `${profile.yearsLearning} years, since mid-2020`,
-  },
-  {
-    id: "shipping",
-    name: "ci / shipping",
-    detail: `${profile.yearsProfessional} years in production`,
-  },
-  {
-    id: "manual-testing",
-    name: "manual-testing",
-    detail: "still run by hand, every time",
-  },
-] as const;
+export const getChecks = () => {
+  const availability = getAvailability();
+
+  return [
+    {
+      id: "self-taught",
+      name: "self-taught",
+      detail: `${profile.yearsLearning} years, since mid-2020`,
+    },
+    {
+      id: "shipping",
+      name: "ci / shipping",
+      detail: `${profile.yearsProfessional} years in production`,
+    },
+    {
+      id: "manual-testing",
+      name: "manual-testing",
+      detail: "still run by hand, every time",
+    },
+    {
+      id: "open-to-work",
+      name: "open-to-work",
+      detail: availability.checkDetail,
+    },
+  ] as const;
+};
 
 const MergeBox = () => {
+  const checks = getChecks();
+  const availability = getAvailability();
+
   return (
     <section id="checks" className="scroll-mt-8 pt-16">
       <SectionLabel>checks</SectionLabel>
@@ -59,8 +71,8 @@ const MergeBox = () => {
               This branch has no conflicts with the base branch
             </p>
             <p className="text-sm text-mist">
-              {profile.hometown} at heart, {profile.city} for work. Open to
-              good conversations.
+              {profile.hometown} at heart, {profile.city} for work.{" "}
+              {availability.mergeDetail}
             </p>
           </div>
         </div>

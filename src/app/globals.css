@@ -100,8 +100,10 @@ body {
   background: var(--background);
 }
 
-a {
-  color: inherit;
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 ::selection {

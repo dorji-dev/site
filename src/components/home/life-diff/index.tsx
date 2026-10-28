@@ -5,7 +5,7 @@ import PhotoViewer from "@/components/home/photo-viewer";
 import SectionLabel from "@/components/home/section-label";
 import FileHeader from "@/components/home/life-diff/file-header";
 import Hunk from "@/components/home/life-diff/hunk";
-import { lifeDiff } from "@/lib/life-diff";
+import { getLifeDiff } from "@/lib/life-diff";
 
 const subscribeHash = (onChange: () => void) => {
   window.addEventListener("hashchange", onChange);
@@ -24,6 +24,7 @@ const LifeDiff = () => {
   const [viewed, setViewed] = useState(false);
   const [copiedLine, setCopiedLine] = useState<string | null>(null);
 
+  const lifeDiff = getLifeDiff();
   const activeLine = selectedLine ?? hash;
 
   const onToggleExpand = (id: string) => {
@@ -61,6 +62,9 @@ const LifeDiff = () => {
       </SectionLabel>
       <div className="mt-6 overflow-hidden rounded-lg border border-line bg-background">
         <FileHeader
+          path={lifeDiff.path}
+          additions={lifeDiff.additions}
+          deletions={lifeDiff.deletions}
           notesHidden={notesHidden}
           viewed={viewed}
           onToggleNotes={() => setNotesHidden((value) => !value)}

@@ -2,9 +2,11 @@ import Image from "next/image";
 import { GitPullRequestIcon, RepoIcon } from "@primer/octicons-react";
 import { BranchRef } from "@/components/home/branch-ref";
 import { commitCount } from "@/lib/history";
-import { profile } from "@/lib/profile";
+import { getAvailability, profile } from "@/lib/profile";
 
 const PrHeader = () => {
+  const availability = getAvailability();
+
   return (
     <section className="pt-16 sm:pt-24">
       <p className="flex items-center gap-2 font-mono text-sm text-mist">
@@ -43,10 +45,11 @@ const PrHeader = () => {
       </div>
       <p className="mt-8 max-w-2xl text-base leading-7 text-ink sm:text-lg sm:leading-8">
         Self-taught frontend engineer from {profile.hometown}, now based in{" "}
-        {profile.location}. I walked
-        away from mechanical engineering in 2019, taught myself the web from C
-        up to React, and have been shipping for {profile.yearsProfessional}{" "}
-        years. These days I build the frontend at{" "}
+        {profile.location}. I walked away from mechanical engineering in 2019,
+        taught myself C, Java, Python, and the web — HTML, CSS, JavaScript,
+        React — and have been
+        shipping for {profile.yearsProfessional} years.{" "}
+        {availability.started ? "I left" : "I'm leaving"}{" "}
         <a
           href={profile.company.url}
           target="_blank"
@@ -55,7 +58,9 @@ const PrHeader = () => {
         >
           {profile.company.name}
         </a>
-        .
+        {availability.started
+          ? " and I'm open to work."
+          : ` and I'm open to work from ${availability.long}.`}
       </p>
     </section>
   );
