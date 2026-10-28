@@ -71,7 +71,7 @@ const MergeBox = () => {
               This branch has no conflicts with the base branch
             </p>
             <p className="text-sm text-mist">
-              {profile.hometown} at heart, {profile.city} for work.{" "}
+              From {profile.hometown}, based in {profile.city}.{" "}
               {availability.mergeDetail}
             </p>
           </div>

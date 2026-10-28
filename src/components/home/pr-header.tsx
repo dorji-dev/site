@@ -45,9 +45,8 @@ const PrHeader = () => {
       </div>
       <p className="mt-8 max-w-2xl text-base leading-7 text-ink sm:text-lg sm:leading-8">
         Self-taught frontend engineer from {profile.hometown}, now based in{" "}
-        {profile.location}. I walked away from mechanical engineering in 2019,
-        taught myself C, Java, Python, and the web — HTML, CSS, JavaScript,
-        React — and have been
+        {profile.location}. I left mechanical engineering in 2019 and taught
+        myself C, Java, Python, HTML, CSS, JavaScript, and React. I've been
         shipping for {profile.yearsProfessional} years.{" "}
         {availability.started ? "I left" : "I'm leaving"}{" "}
         <a

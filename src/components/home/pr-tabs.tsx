@@ -32,14 +32,14 @@ const PrTabs = () => {
   return (
     <nav
       aria-label="Sections"
-      className="mt-10 -mx-5 overflow-x-auto border-b border-line px-5 sm:mx-0 sm:px-0"
+      className="mt-10 -mx-5 overflow-x-auto overflow-y-clip border-b border-line px-5 sm:mx-0 sm:px-0"
     >
       <ul className="flex min-w-max gap-1 text-sm">
         {tabs.map(({ href, label, count, icon: TabIcon }) => (
           <li key={href}>
             <a
               href={href}
-              className="-mb-px flex items-center gap-2 border-b-2 border-transparent px-3 py-2.5 text-mist hover:border-line hover:text-ink"
+              className="flex items-center gap-2 border-b-2 border-transparent px-3 py-2.5 text-mist hover:border-line hover:text-ink"
             >
               <TabIcon size={16} />
               <span>{label}</span>

@@ -18,8 +18,8 @@ export const getAvailability = () => {
     headerWhen: started ? "now" : `from ${AVAILABLE_FROM_LABEL}`,
     checkDetail: started ? "available now" : `from ${AVAILABLE_FROM_LABEL}`,
     mergeDetail: started
-      ? "Available now — remote, or here in Bhutan."
-      : `Available from ${AVAILABLE_FROM_LONG} — remote, or here in Bhutan.`,
+      ? "Available now, remote or here in Bhutan."
+      : `Available from ${AVAILABLE_FROM_LONG}, remote or here in Bhutan.`,
     historyWhen: started ? "now" : `from ${AVAILABLE_FROM_LABEL}`,
     diffFrom: started ? "now" : AVAILABLE_FROM_LABEL,
     description: started
